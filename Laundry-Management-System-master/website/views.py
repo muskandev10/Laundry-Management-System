@@ -1,0 +1,1 @@
+# All views have been moved to laundry/views.py

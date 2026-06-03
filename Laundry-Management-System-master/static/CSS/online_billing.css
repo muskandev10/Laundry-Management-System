@@ -1,0 +1,143 @@
+/* ── Online Billing Page Styles ───────────────────────────────── */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.billing-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1E3A5F;
+}
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button,
+.btn {
+    background: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+}
+
+button:hover,
+.btn:hover {
+    background: #0056b3;
+}
+
+.bill-box {
+    margin-top: 20px;
+    padding: 25px;
+    border-radius: 10px;
+    background: #f9fafc;
+    border: 1px solid #e0e0e0;
+}
+
+.bill-box h3 {
+    text-align: center;
+    color: #28a745;
+    margin-bottom: 15px;
+}
+
+.bill-box p {
+    margin: 6px 0;
+}
+
+.status {
+    font-weight: bold;
+    color: #ff4d4d;
+}
+
+.pay-btn {
+    background: green;
+    margin-top: 10px;
+}
+
+.print-btn {
+    background: orange;
+    margin-top: 10px;
+}
+
+.section-title {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+@media print {
+    button {
+        display: none;
+    }
+}
+
+/* ── Classes for inline styles ───────────────────────────────── */
+
+.billing-title {
+    font-weight: 800;
+    font-size: 28px;
+    text-align: center;
+}
+
+.invoice-title {
+    text-align: center;
+    color: #1E3A5F;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.divider-light {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+}
+
+.divider-bold {
+    border: 0;
+    border-top: 2px solid #1E3A5F;
+    margin: 15px 0;
+}
+
+.grand-total {
+    text-align: right;
+    color: #28a745;
+}
+
+.pay-link {
+    text-decoration: none;
+    display: inline-block;
+}

@@ -1,0 +1,19 @@
+/* ── Welcome Admin Page Styles ────────────────────────────────── */
+
+.payment-amount-small {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.empty-orders-text {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 2rem;
+}
+
+.empty-orders-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}

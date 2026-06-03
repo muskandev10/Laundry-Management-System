@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Our Services & Pricing{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'CSS/services.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-page">
+    <div class="admin-header">
+        <h1><i class="fas fa-tags"></i> Services & Pricing</h1>
+        <p class="services-subtitle">Transparent pricing for all your laundry needs. All prices are per KG.</p>
+    </div>
+
+    <div class="services-grid">
+        {% for service in services %}
+        <div class="card service-card">
+            <div class="service-icon-circle">
+                <i class="fas {{ service.icon }}"></i>
+            </div>
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
+            <div class="price-tag">
+                ₹{{ service.price }} <span>/ KG</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="card cta-card">
+        <h2>Ready to get started?</h2>
+        <p>Place your first order today and experience world-class laundry service.</p>
+        <a href="{% url 'laundry_request' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Request Now
+        </a>
+    </div>
+</div>
+{% endblock %}

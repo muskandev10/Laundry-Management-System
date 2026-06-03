@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Laundry Management System - Professional laundry service management">
+    <title>{% block title %}LMS{% endblock %} | Laundry Management System</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3003/3003984.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="{% static 'CSS/main.css' %}" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% block body %}
+    {% block navbar %}
+    <!-- Navbar -->
+ <nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="{% url 'home' %}" class="nav-logo">
+            LMS
+        </a>
+        <ul class="nav-links" id="nav-links">
+            {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                    <li><a href="{% url 'admin_dashboard' %}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                {% else %}
+                    <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="{% url 'services' %}"><i class="fas fa-tags"></i> Services</a></li>
+                    <li><a href="{% url 'my_orders' %}"><i class="fas fa-history"></i> My Orders</a></li>
+                    <li><a href="{% url 'laundry_request' %}"><i class="fas fa-plus-circle"></i> Request</a></li>
+                    <li><a href="{% url 'track' %}"><i class="fas fa-truck"></i> Track</a></li>
+                    <li><a href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a></li>
+                {% endif %}
+            {% else %}
+                <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="{% url 'services' %}"><i class="fas fa-tags"></i> Services</a></li>
+                <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Sign In</a></li>
+                <li><a href="{% url 'signup' %}"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+            {% endif %}
+        </ul>
+
+        <div class="nav-right">
+            <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            {% if user.is_authenticated %}
+
+                <span class="nav-user">
+                    <i class="fas fa-user-circle"></i>
+                    {{ user.username }}
+                </span>
+
+                <a href="{% url 'logout' %}" class="btn-nav-logout">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'admin_login' %}" class="btn-nav-admin">
+                    Admin Login
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</nav>
+{% endblock %}
+
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="messages-container" id="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" id="alert-{{ forloop.counter }}">
+            {{ message }}
+            <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Page Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="fas fa-tshirt"></i> LMS</h3>
+                <p>Professional laundry management system. Submit requests, track orders, and manage your laundry with ease.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'laundry_request' %}">Laundry Request</a></li>
+                    <li><a href="{% url 'track' %}">Track Order</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Sign In</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i class="fas fa-map-marker-alt"></i> India</p>
+                <p><i class="fas fa-envelope"></i> support@lms.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Laundry Management System. All rights reserved.</p>
+        </div>
+    </footer>
+    {% endblock %}
+
+    {% block extra_js %}{% endblock %}
+    <script>
+        // Auto-dismiss alerts after 5 seconds
+        document.querySelectorAll('.alert').forEach(function(alert) {
+            setTimeout(function() { alert.remove(); }, 5000);
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById('nav-mobile-toggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('nav-links');
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            // Toggle icon
+            const icon = this.querySelector('i');
+            if (this.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+</html>

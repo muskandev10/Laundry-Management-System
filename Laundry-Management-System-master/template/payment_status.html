@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Status</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Main Design System -->
+    <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
+    <!-- Page Specific Styles -->
+    <link rel="stylesheet" href="{% static 'CSS/payment_status.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% if status == 'SUCCESS' %}
+            <div class="status-icon success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1 class="success">Payment Successful!</h1>
+            <p>Thank you for your payment for <strong>{{ bill.service }}</strong>.</p>
+            <p>Bill ID: <span class="bill-id">#{{ bill.id }}</span></p>
+            <p class="amount">Total Paid: ₹ {{ bill.total }}</p>
+        {% else %}
+            <div class="status-icon failed-icon">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h1 class="failed">Payment Failed</h1>
+            <p>Something went wrong with your transaction. Please try again or contact support.</p>
+        {% endif %}
+        
+        <br>
+        <a href="{% url 'online_billing' %}" class="btn">
+            <i class="fas fa-arrow-left"></i> Back to Billing
+        </a>
+    </div>
+</body>
+</html>

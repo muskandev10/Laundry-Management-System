@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %}
+<div class="center-page">
+    <div class="card status-card">
+        <div class="error-icon"><i class="fas fa-times-circle"></i></div>
+        <div class="result-info">
+            <h2>Something Went Wrong</h2>
+            <p>Invalid credentials. Please check your email and password and try again.</p>
+        </div>
+        <div class="error-actions">
+            <a href="{% url 'login' %}" class="btn btn-primary" id="error-try-again-btn">
+                <i class="fas fa-arrow-left"></i> Try Again
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+/* ── Request Page Styles ──────────────────────────────────────── */
+
+/* Centered form container */
+.request-page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Solid card look — visible border, shadow, no transparency */
+.request-page .card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 2.5rem 3rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Disable hover lift on form cards */
+.request-page .card:hover {
+    transform: none;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--border-color);
+}
+
+/* Form header */
+.request-page .card-header {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Section titles */
+.request-page .form-section-title {
+    margin-top: 2rem;
+    padding-bottom: 0.6rem;
+    font-size: 1rem;
+}
+
+.request-page .form-section-title:first-of-type {
+    margin-top: 0.5rem;
+}
+
+.request-page .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+
+/* Full-width fields span both columns */
+.request-page .form-grid-full {
+    grid-column: 1 / -1;
+}
+
+/* Labels */
+.request-page .form-group label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+}
+
+/* Consistent input styling */
+.request-page .form-input,
+.request-page .form-select {
+    height: 46px;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    width: 100%;
+}
+
+.request-page .form-textarea {
+    min-height: 80px;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    width: 100%;
+}
+
+/* Submit area */
+.form-submit-wrapper {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive — single column on mobile */
+@media (max-width: 600px) {
+    .request-page .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .request-page .card {
+        padding: 1.5rem;
+    }
+}

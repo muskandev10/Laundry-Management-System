@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'CSS/welcomestyle.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero" id="hero-section">
+    <h1>Drypure<span>Laundry</span> <span>Management</span> System</h1>
+    <p>Professional laundry service at your doorstep. Submit requests, track orders, and enjoy clean clothes without the hassle.</p>
+
+    <div class="hero-tags" id="hero-tags">
+        <div class="hero-tag"><i class="fas fa-soap"></i> Cleaning</div>
+        <div class="hero-tag"><i class="fas fa-water"></i> Washing</div>
+        <div class="hero-tag"><i class="fas fa-wind"></i> Drying</div>
+        <div class="hero-tag"><i class="fas fa-fire"></i> Ironing</div>
+    </div>
+
+    <div class="hero-actions" id="hero-actions">
+        {% if user.is_staff %}
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-primary" id="hero-dashboard-btn">
+            <i class="fas fa-chart-line"></i> Go to Dashboard
+        </a>
+        {% else %}
+        <a href="{% url 'laundry_request' %}" class="btn btn-primary" id="hero-request-btn">
+            <i class="fas fa-paper-plane"></i> New Laundry Request
+        </a>
+        {% endif %}
+        <a href="{% url 'track' %}" class="btn btn-secondary" id="hero-track-btn">
+            <i class="fas fa-search-location"></i> Track Order
+        </a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features" id="features-section">
+    <div class="feature-card" id="feature-easy">
+        <div class="feature-icon"><i class="fas fa-mouse-pointer"></i></div>
+        <h3>Easy Booking</h3>
+        <p>Submit your laundry request in just a few clicks with our simple and intuitive form.</p>
+    </div>
+    <div class="feature-card" id="feature-track">
+        <div class="feature-icon"><i class="fas fa-route"></i></div>
+        <h3>Real-Time Tracking</h3>
+        <p>Track your order status from pickup to delivery. Always know where your clothes are.</p>
+    </div>
+    <div class="feature-card" id="feature-secure">
+        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Secure & Reliable</h3>
+        <p>Your clothes and data are safe with us. We use secure authentication and careful handling.</p>
+    </div>
+</section>
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

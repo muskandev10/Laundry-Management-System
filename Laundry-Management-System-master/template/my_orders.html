@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Orders{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'CSS/my_orders.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-page">
+    <div class="admin-header">
+        <h1><i class="fas fa-history"></i> My Order History</h1>
+        <p class="orders-subtitle">Track and view all your laundry requests in one place.</p>
+    </div>
+
+    <div class="card">
+        {% if orders %}
+        <div class="data-table-wrapper">
+            <table class="data-table" id="my-orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Type</th>
+                        <th>Cloth</th>
+                        <th>Weight</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr id="order-row-{{ order.pk }}">
+                        <td><strong>#{{ order.pk }}</strong></td>
+                        <td>{{ order.laundry_type }}</td>
+                        <td>{{ order.cloth_type }}</td>
+                        <td>{{ order.weight }} kg</td>
+                        <td>
+                            {% if order.tracking %}
+                                <span class="status-pill {{ order.tracking.get_status_class }}">
+                                    {{ order.tracking.get_status_display_label }}
+                                </span>
+                            {% else %}
+                                <span class="status-pill status-pending">Processing</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.bill %}
+                                <span class="status-pill {% if order.bill.payment_status == 'Paid' %}status-delivered{% else %}status-pending{% endif %}">
+                                    {{ order.bill.payment_status }}
+                                </span>
+                            {% else %}
+                                <span class="status-pill status-pending">Pending Bill</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.bill %}
+                                ₹{{ order.bill.total }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                {% if order.bill and order.bill.payment_status != 'Paid' %}
+                                    <a href="{% url 'online_billing' order.pk %}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-credit-card"></i> Pay Now
+                                    </a>
+                                {% elif order.bill %}
+                                    <span class="paid-label">
+                                        <i class="fas fa-check-circle"></i> Paid
+                                    </span>
+                                {% else %}
+                                    <span class="awaiting-label">Awaiting Bill</span>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-folder-open empty-state-icon"></i>
+            <h3>No Orders Found</h3>
+            <p class="empty-state-text">You haven't placed any laundry requests yet.</p>
+            <a href="{% url 'laundry_request' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Place New Request
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

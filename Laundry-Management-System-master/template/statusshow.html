@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Order Status{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'CSS/statusshow.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="center-page">
+    <div class="card status-card">
+        {% if error %}
+        <div class="error-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="result-info">
+            <h2>Order Not Found</h2>
+            <p>{{ error }}</p>
+        </div>
+        {% elif Status %}
+        <div class="status-icon-large">
+            <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="result-info">
+            <h2>Order Status</h2>
+            <div class="status-badge" id="status-badge">
+                <i class="fas fa-circle-notch"></i> {{ Status }}
+            </div>
+        </div>
+        {% else %}
+        <div class="status-icon-muted">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="result-info">
+            <h2>No Results</h2>
+            <p>Please enter a valid tracking ID.</p>
+        </div>
+        {% endif %}
+
+        <div class="status-actions">
+            <a href="{% url 'track' %}" class="btn btn-primary" id="track-again-btn">
+                <i class="fas fa-search"></i> Track Another
+            </a>
+            <a href="{% url 'home' %}" class="btn btn-secondary" id="goto-home-from-status-btn">
+                <i class="fas fa-home"></i> Go Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

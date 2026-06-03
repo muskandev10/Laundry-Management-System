@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'CSS/welcome_admin.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="admin-page">
+    <div class="admin-header">
+        <h1>👨‍💼 Admin Dashboard</h1>
+        <div class="admin-stats" id="admin-stats">
+            <div class="stat-box">
+                <div class="stat-num" id="stat-total">{{ orders|length }}</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="card-header">All Laundry Orders</h2>
+
+        {% if orders %}
+        <div class="data-table-wrapper">
+            <table class="data-table" id="admin-orders-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Mobile</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Pin Code</th>
+                        <th>Laundry</th>
+                        <th>Cloth</th>
+                        <th>Weight</th>
+                        <th>Pickup</th>
+                        <th>Delivery</th>
+                        <th>Order Status</th>
+                        <th>Payment</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr id="order-row-{{ order.pk }}">
+                        <td><strong>#{{ order.pk }}</strong></td>
+                        <td>{{ order.full_name }}</td>
+                        <td>{{ order.mobile }}</td>
+                        <td>{{ order.state }}</td>
+                        <td>{{ order.city }}</td>
+                        <td>{{ order.pin_code }}</td>
+                        <td>{{ order.laundry_type }}</td>
+                        <td>{{ order.cloth_type }}</td>
+                        <td>{{ order.weight }} kg</td>
+                        <td>{{ order.issued_date }}</td>
+                        <td>{{ order.delivery_date }}</td>
+                        <td>
+                            {% if order.tracking %}
+                            <div class="status-container">
+                                <span class="status-pill {{ order.tracking.get_status_class }}">
+                                    {{ order.tracking.get_status_display_label }}
+                                </span>
+
+                                <div class="status-update-mini">
+                                    <form method="POST" action="{% url 'update_status' order.pk %}" class="status-form">
+                                        {% csrf_token %}
+                                        <select name="status" onchange="this.form.submit()" class="status-select-minimal">
+                                            {% for val, label in order.tracking.STATUS_CHOICES %}
+                                                <option value="{{ val }}" {% if order.tracking.status == val %}selected{% endif %}>
+                                                    {{ label }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                            {% else %}
+                            <span class="status-pill status-pending">No Tracking</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if order.bill %}
+                                <span class="status-pill {% if order.bill.payment_status == 'Paid' %}status-delivered{% else %}status-pending{% endif %}">
+                                    {{ order.bill.payment_status }}
+                                </span>
+                                <div class="payment-amount-small">
+                                    ₹{{ order.bill.total }}
+                                </div>
+                            {% else %}
+                                <span class="status-pill status-pending">No Bill</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <div class="action-btns">
+                                <a href="{% url 'delete_order' order.pk %}" class="delete-btn"
+                                    onclick="return confirm('Are you sure you want to delete this order?');" title="Delete Order">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="empty-orders-text">
+            <i class="fas fa-inbox empty-orders-icon"></i>
+            No laundry orders yet.
+        </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

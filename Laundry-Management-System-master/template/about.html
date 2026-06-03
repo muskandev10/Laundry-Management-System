@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'CSS/aboutstyle.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="about-page">
+    <div class="card">
+        <div class="about-grid">
+            <div class="about-content">
+                <h1>About <span>LMS</span></h1>
+                <p>
+                    The Laundry Management System (LMS) is a comprehensive platform designed to
+                    streamline the entire laundry service process. From booking to delivery tracking,
+                    we make managing laundry effortless and transparent.
+                </p>
+                <p>
+                    Our system allows customers to easily request laundry pickups, specify their
+                    garment details, and track the real-time status of their orders. For administrators,
+                    we provide a powerful dashboard to manage all incoming requests efficiently.
+                </p>
+                <p>
+                    Built with modern technology and best practices, LMS ensures your data is
+                    secure and the experience is seamless across all devices.
+                </p>
+                <a href="{% url 'laundry_request' %}" class="btn btn-primary about-cta-btn" id="about-request-btn">
+                    <i class="fas fa-paper-plane"></i> Get Started
+                </a>
+            </div>
+            <div class="about-image">
+                <img src="{% static 'images/person.jpg' %}" alt="About LMS" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

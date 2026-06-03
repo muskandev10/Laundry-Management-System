@@ -1,0 +1,33 @@
+/* ── Request Done Page Styles ─────────────────────────────────── */
+
+.success-icon-large {
+    font-size: 4rem;
+    color: #51cf66;
+    margin-bottom: 1rem;
+}
+
+.tracking-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.delivery-address {
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.estimated-total {
+    margin-top: 0.8rem;
+    font-weight: 700;
+    color: #28a745;
+    font-size: 1.1rem;
+}
+
+.action-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}

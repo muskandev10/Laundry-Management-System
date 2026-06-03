@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'CSS/online_billing.css' %}">
+
+</head>
+
+<body>
+
+<div class="billing-page">
+
+    <div class="container">
+
+        <h2 class="billing-title">Online Billing</h2>
+
+        {% if show_form %}
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Customer Name:</label>
+            <input type="text" name="customer_name">
+
+            <label>Phone:</label>
+            <input type="text" name="phone">
+
+            <label>Service:</label>
+            <input type="text" name="service">
+
+            <label>Quantity:</label>
+            <input type="number" name="quantity">
+
+            <label>Price:</label>
+            <input type="number" name="price">
+
+            <button type="submit">Generate Bill</button>
+
+        </form>
+        {% endif %}
+
+        {% if bill %}
+
+        <div class="bill-box">
+            <h3 class="invoice-title">INVOICE</h3>
+            
+            <p><b>Name:</b> {{ bill.customer_name }}</p>
+            <p><b>Phone:</b> {{ bill.phone }}</p>
+            <p><b>Service:</b> {{ bill.service }}</p>
+            
+            <hr class="divider-light">
+            
+            <p><b>Quantity:</b> {{ bill.quantity }} kg</p>
+            <p><b>Unit Price:</b> ₹ {{ bill.price }} / kg</p>
+            <p><b>Total Amount:</b> ₹ {{ bill.total }}</p>
+
+            <hr class="divider-bold">
+            
+            <h2 class="grand-total">Grand Total: ₹ {{ bill.total }}</h2>
+            
+            <p class="status">Status: {{ bill.payment_status }}</p>
+            
+            <br>
+            <button class="print-btn" onclick="window.print()">Print Bill</button>
+        </div>
+
+        <br><br>
+
+        <h3>Pay Online</h3>
+
+        <p>Secure payment via PhonePe</p>
+
+        <a href="{% url 'initiate_payment' bill.id %}" class="btn pay-btn pay-link">Pay ₹ {{ bill.total }} with PhonePe</a>
+
+    </div>
+
+    {% endif %}
+
+    </div>
+    </div>
+
+</body>
+
+</html>

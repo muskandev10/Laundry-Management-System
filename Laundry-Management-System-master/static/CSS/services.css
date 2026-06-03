@@ -1,0 +1,78 @@
+/* ── Services Page Styles ─────────────────────────────────────── */
+
+.services-subtitle {
+    color: var(--text-secondary);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service-card {
+    text-align: center;
+    padding: 2.5rem;
+    transition: transform 0.3s ease;
+    border: 1px solid var(--glass-border);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.15);
+}
+
+.service-icon-circle {
+    width: 80px;
+    height: 80px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: var(--accent-primary);
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    min-height: 3rem;
+}
+
+.price-tag {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent-primary);
+}
+
+.price-tag span {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.cta-card {
+    margin-top: 3rem;
+    background: var(--glass-bg);
+    border: 1px dashed var(--accent-primary);
+    text-align: center;
+    padding: 3rem;
+}
+
+.cta-card h2 {
+    margin-bottom: 1rem;
+}
+
+.cta-card p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}

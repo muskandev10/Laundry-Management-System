@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Request Submitted{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'CSS/requestdone.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="center-page">
+    <div class="card status-card">
+        <div class="success-icon-large">
+            <i class="fas fa-check-circle"></i>
+        </div>
+
+        <div class="result-info">
+            <h2>Thank You, "{{ Name }}"!</h2>
+            <p>Your laundry request has been submitted successfully.</p>
+        </div>
+
+        <div class="result-info">
+            <p class="tracking-label">Your Tracking ID</p>
+            <div class="tracking-id" id="tracking-id-value">{{ TrackingId }}</div>
+            <p class="delivery-address">
+                Delivery Address: "{{ Address }}"
+            </p>
+            <p class="estimated-total">
+                Estimated Total: ₹ {{ Price }}
+            </p>
+        </div>
+
+        <div class="action-buttons">
+            <a href="{% url 'track' %}" class="btn btn-primary" id="goto-track-btn">
+                <i class="fas fa-search-location"></i> Track Order
+            </a>
+          <a href="{% url 'online_billing' TrackingId %}" class="btn btn-success" id="goto-bill-btn">
+    <i class="fas fa-file-invoice-dollar"></i> View Bill
+</a>
+
+            <a href="{% url 'home' %}" class="btn btn-secondary" id="goto-home-btn">
+                <i class="fas fa-home"></i> Go Home
+            </a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

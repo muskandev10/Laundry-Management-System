@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Track Order{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'CSS/trackstatus.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="center-page">
+    <div class="card status-card">
+        <div class="track-icon-wrapper">
+            <i class="fas fa-search-location track-icon"></i>
+        </div>
+        <h2 class="card-header track-header">Track Your Order</h2>
+        <p class="track-description">Enter your Tracking ID to see the current status of your laundry order.</p>
+
+        <form method="post" action="{% url 'tracking_details' %}" id="tracking-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.tracking_id }}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="track-submit-btn">
+                <i class="fas fa-search"></i> Track
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
