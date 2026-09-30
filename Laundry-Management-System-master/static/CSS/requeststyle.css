@@ -4,6 +4,8 @@
 .request-page {
     max-width: 680px;
     margin: 0 auto;
+     /* background-image: url('../images/first.jpg');
+    background-size: cover; */
     padding: 2rem;
 }
 
